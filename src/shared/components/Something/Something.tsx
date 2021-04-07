@@ -7,6 +7,7 @@ classes:
 `);
 
 const Test = () => {
+  const m1 = 'moo';
   return <label className={classes.white}>This is Something</label>;
 };
 

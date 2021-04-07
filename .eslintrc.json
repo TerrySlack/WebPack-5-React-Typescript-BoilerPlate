@@ -16,7 +16,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "no-useless-constructor": "off",
     "no-unused-vars": "off",
