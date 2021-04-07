@@ -5,25 +5,18 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
+    "lint": "eslint --ext 'mjs,js,jsx,ts,tsx' --max-warnings=0 --fix",
+    "lint-staged": "lint-staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn run lint-staged  && git add --all"
     }
   },
   "lint-staged": {
-    "**/*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "**/*.ts": [
-      "eslint --fix",
-      "git add"
-    ],
-    "**/*.tsx": [
-      "eslint --fix",
-      "git add"
+    "src/**/*.(mjs|js|ts|jsx|tsx)": [
+      "eslint --max-warnings=0 --fix"
     ]
   },
   "dependencies": {
@@ -65,6 +58,7 @@
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-webpack": "^0.13.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",

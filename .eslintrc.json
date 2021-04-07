@@ -3,7 +3,11 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "airbnb-base"],
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -12,6 +16,39 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
-  "rules": {}
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "no-useless-constructor": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["Assets", "./shared/assets"],
+          ["Components", "./src/shared/components"],
+          ["Containers", "./src/shared/containers"],
+          ["Context", "./src/shared/context"],
+          ["HOC", "./src/shared/hoc"],
+          ["Utils", "./src/shared/utils"],
+          ["Pages", "./src/pages"],
+          ["Hooks", "./src/shared/hooks"]
+        ],
+        "extensions": [".mjs", ".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
 }
