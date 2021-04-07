@@ -19,7 +19,7 @@
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "no-useless-constructor": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": 2,
     "@typescript-eslint/no-unused-vars": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "import/extensions": [
