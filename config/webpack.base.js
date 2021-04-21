@@ -1,13 +1,12 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const PrettierPlugin = require('prettier-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
-const paths = require('./paths')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const paths = require('./paths');
 
 module.exports = {
   // Where webpack looks to start building the bundle
-  entry: [paths.src + '/index.tsx'],
+  entry: [`${paths.src}/index.tsx`],
 
   // Where webpack outputs the assets and bundles
   output: {
@@ -39,11 +38,10 @@ module.exports = {
     // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
     new HtmlWebpackPlugin({
       title: 'webpack Boilerplate',
-      //favicon: paths.src + '/images/favicon.png',
-      template: paths.src + '/index.html', // template file
+      // favicon: paths.src + '/images/favicon.png',
+      template: `${paths.src}/index.html`, // template file
       filename: 'index.html', // output file
     }),
-
     // ESLint configuration
     new ESLintPlugin({
       files: ['.', 'src', 'config'],
@@ -51,32 +49,23 @@ module.exports = {
     }),
 
     // Prettier configuration
-    new PrettierPlugin(),
+    // new PrettierPlugin(),
   ],
   resolve: {
     alias: {
-      //Assets: `${__dirname}/public/assets`,
-      Assets: `$paths.src}/shared/assets`,
-      //Components: `${__dirname}/src/shared/components`,
+      // Assets: `${__dirname}/public/assets`,
+      Assets: '$paths.src}/shared/assets',
+      // Components: `${__dirname}/src/shared/components`,
       Components: `${paths.src}/shared/components`,
       Containers: `${paths.src}/shared/containers`,
       Context: `${paths.src}/shared/context`,
       HOC: `${paths.src}/shared/hoc`,
-      Utils: `${paths.src}/utils`,
+      Utils: `${paths.src}/shared/utils`,
       Hooks: `${paths.src}/shared/hooks`,
     },
     symlinks: false,
     cacheWithContext: false,
-    extensions: [
-      '.ts',
-      '.tsx',
-      '.js',
-      '.jsx',
-      '.mjs',
-      '.css',
-      '.scss',
-      '.sass',
-    ],
+    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.mjs', '.css', '.scss', '.sass'],
   },
 
   // Determine how modules within the project are treated
@@ -96,28 +85,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.css$/i,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader',
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         postcssOptions: {
-      //           plugins: [
-      //             [
-      //               'postcss-preset-env',
-      //               {
-      //                 // Options
-      //               },
-      //             ],
-      //           ],
-      //         },
-      //       },
-      //     },
-      //   ],
-      // },
       {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
@@ -131,7 +98,7 @@ module.exports = {
       { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'assets/resource' },
 
       // Fonts and SVGs: Inline files
-      //{ test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'assets/inline' },
+      // { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'assets/inline' },
     ],
   },
-}
+};

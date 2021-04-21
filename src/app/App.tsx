@@ -1,18 +1,19 @@
 import React from 'react';
-// import { Provider } from "react-redux";
-// import ApolloRootProvider from "HOC/Apollo";
-// import { ThemeProvider } from "react-jss";
-// import createStore from "../store";
-// import Routes from "../routes";
-import Test from 'Components/Test';
+import { Provider } from 'react-redux';
+
+// Pull the mock data
+import createStore from '../store';
 import './App.css';
-//const store = createStore();
-const App = () => {
-  return (
-    <div>
-      <Test />
-    </div>
-  );
-};
+import AppDataWrapper from './AppDataWrapper';
+
+// Create the store
+const store = createStore();
+
+// Render the app
+const App = () => (
+  <Provider store={store}>
+    <AppDataWrapper />
+  </Provider>
+);
 
 export default App;

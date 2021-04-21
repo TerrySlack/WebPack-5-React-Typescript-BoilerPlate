@@ -1,0 +1,25 @@
+.tableContainer {
+  margin: 0 auto;
+  width: 100%;
+}
+.table {
+  margin-left: auto;
+  margin-right: auto;
+}
+.theadCellPadding {
+  padding-bottom: 6px;
+}
+.cursor {
+  cursor: pointer;
+}
+.leftAligned {
+  text-align: left;
+}
+.centered {
+  text-align: center;
+}
+.header {
+  color: #4b4444;
+  text-decoration: none;
+  font-weight: 500;
+}

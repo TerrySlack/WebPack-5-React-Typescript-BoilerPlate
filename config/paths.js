@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   // Source files
@@ -9,4 +9,4 @@ module.exports = {
 
   // Static files that get copied to build folder
   public: path.resolve(__dirname, '../public'),
-}
+};

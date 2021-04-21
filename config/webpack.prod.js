@@ -1,9 +1,9 @@
-const paths = require('./paths')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.base.js')
-
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const common = require('./webpack.base.js');
+const paths = require('./paths');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -42,18 +42,33 @@ module.exports = merge(common, {
     }),
   ],
   optimization: {
+    noEmitOnErrors: true,
     minimize: true,
-    minimizer: [new CssMinimizerPlugin(), '...'],
-    // Once your build outputs multiple chunks, this option will ensure they share the webpack runtime
-    // instead of having their own. This also helps with long-term caching, since the chunks will only
-    // change when actual code changes, not the webpack runtime.
-    runtimeChunk: {
-      name: 'runtime',
+    minimizer: [
+      new TerserJSPlugin({
+        test: /\.js(\?.*)?$/i,
+        exclude: /\/node_modules/,
+      }),
+      new CssMinimizerPlugin(),
+    ],
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
     },
   },
+
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-})
+});

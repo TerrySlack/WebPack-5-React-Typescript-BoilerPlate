@@ -1,6 +1,2 @@
-// declaration.d.ts
-// declare module '*.css' {
-//   const content: Record<string, string>
-//   export default content
-// }
-declare module '*.css'
+// Put this is for css modules to work
+declare module '*.css';

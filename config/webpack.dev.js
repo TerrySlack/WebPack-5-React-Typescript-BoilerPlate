@@ -1,7 +1,8 @@
-const webpack = require('webpack')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.base.js')
-const paths = require('./paths')
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.base.js');
+const paths = require('./paths');
+
 module.exports = merge(common, {
   // Set the mode to development or production
   mode: 'development',
@@ -13,6 +14,7 @@ module.exports = merge(common, {
   devServer: {
     historyApiFallback: true,
     contentBase: paths.build,
+    index: '/',
     open: true,
     compress: true,
     hot: true,
@@ -31,7 +33,7 @@ module.exports = merge(common, {
             options: {
               sourceMap: true,
               importLoaders: 1,
-              //modules: true,
+              // modules: true,
               modules: {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
               },
@@ -46,7 +48,7 @@ module.exports = merge(common, {
         test: /\.(scss|css)$/i,
         use: [
           'style-loader',
-          //'css-loader',
+          // 'css-loader',
           {
             loader: 'css-loader',
             options: { sourceMap: true, importLoaders: 1 },
@@ -56,19 +58,6 @@ module.exports = merge(common, {
         ],
         exclude: /\.module\.css$/i,
       },
-      // {
-      //   test: /\.(scss|css)$/i,
-      //   use: [
-      //     'style-loader',
-      //     {
-      //       loader: 'css-loader',
-      //       options: { sourceMap: true, importLoaders: 1, modules: true },
-      //     },
-      //     { loader: 'postcss-loader', options: { sourceMap: true } },
-      //     { loader: 'sass-loader', options: { sourceMap: true } },
-      //   ],
-      //   exclude: /\.module\.css$/,
-      // },
     ],
   },
 
@@ -76,4 +65,4 @@ module.exports = merge(common, {
     // Only update what has changed on hot reload
     new webpack.HotModuleReplacementPlugin(),
   ],
-})
+});

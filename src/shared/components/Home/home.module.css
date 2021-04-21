@@ -1,0 +1,16 @@
+.container {
+  padding-top: 13px;
+}
+.centerTitle {
+  width: 100%;
+  padding-bottom: 1em;
+}
+.title {
+  color: #000;
+  font-weight: bold;
+  font-size: 15px;
+  opacity: 0.7;
+}
+.centered {
+  text-align: center;
+}
