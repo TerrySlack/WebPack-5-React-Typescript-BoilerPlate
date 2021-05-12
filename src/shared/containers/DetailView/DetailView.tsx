@@ -21,22 +21,6 @@ const selectedDetailView = ({ home: { selectedDetailViewId, features } }: any) =
   };
 };
 
-// const selectedDetailView = ({ selectedDetailViewId, features }: any) => {
-//   // Find the detail view selected by the user
-//   const {
-//     properties: { title, mag, time, status, tsunami, type },
-//   } = features.find(({ id }: any) => id === selectedDetailViewId);
-
-//   return {
-//     title,
-//     mag,
-//     time,
-//     status,
-//     tsunami,
-//     type,
-//   };
-// };
-
 const DetailViewContainer = () => {
   // Get the details for the selected detailView
   const { title, mag, time, status, tsunami, type } = useSelector(selectedDetailView, areEqual);

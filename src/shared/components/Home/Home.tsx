@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { areEqualShallow } from 'Utils/equalityChecks';
+import { areEqual } from 'Utils/equalityChecks';
 import { EarthQuakeTable } from 'Containers/EarthQuakeTable';
 import classes from './home.module.css';
 
@@ -19,7 +19,7 @@ const Home = memo(
       <EarthQuakeTable rows={features} sort={sort} anchorClick={anchorClick} />
     </div>
   ),
-  areEqualShallow
+  areEqual
 );
 
 export default Home;

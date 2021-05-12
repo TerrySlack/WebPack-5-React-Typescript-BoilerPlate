@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import getDateFromMilliseconds from 'Utils/dates';
-import { areEqualShallow } from 'Utils/equalityChecks';
+import { areEqual } from 'Utils/equalityChecks';
 import Anchor from 'Containers/Anchor';
 import classes from './earthQuakeTable.module.css';
 
@@ -65,7 +65,7 @@ const EarthQuakeTable = memo(
       </table>
     </div>
   ),
-  areEqualShallow
+  areEqual
 );
 
 export default EarthQuakeTable;
