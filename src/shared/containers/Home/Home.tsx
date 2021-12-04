@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Home from 'Components/Home';
-import { useSelector, useDispatch } from 'react-redux';
-import { areEqual } from 'Utils/equalityChecks';
-import customSort from 'Utils/sortData';
-import { setSelectedDetailViewId, setSortedFeatures } from 'Containers/Home';
+import Home from "Components/Home";
+import { useSelector, useDispatch } from "react-redux";
+import { areEqual } from "Utils/equalityChecks";
+import customSort from "Utils/sortData";
+import { setSelectedDetailViewId, setSortedFeatures } from "Containers/Home";
 
-const HomeContainer = () => {
+const HomeContainer = function () {
   const dispatch = useDispatch();
-  const { features, title } = useSelector(({ home: { features, title } }: any) => ({ features, title }), areEqual);
+  const { features, title } = useSelector(
+    ({ home: { features, title } }: any) => ({ features, title }),
+    areEqual
+  );
 
   // Force a rerender,
-  const [, setSortColumn] = useState('');
-  const [sortDirection, setSortDirection] = useState('desc');
-  const history = useHistory();
+  const [, setSortColumn] = useState("");
+  const [sortDirection, setSortDirection] = useState("desc");
+  const navigate = useNavigate();
 
   const handleSortClick = (e: any) => {
     e.preventDefault();
@@ -23,7 +26,7 @@ const HomeContainer = () => {
     const text = `properties.${e.target.dataset.key.toLocaleLowerCase()}`;
 
     // Set the direction, it should be the opposite of what is currently being displayed
-    const direction = sortDirection === 'desc' ? 'asc' : 'desc';
+    const direction = sortDirection === "desc" ? "asc" : "desc";
 
     // Sort the features array
     const sortedFeatures = customSort(text, direction, features);
@@ -51,9 +54,16 @@ const HomeContainer = () => {
     // Dispatch the selected detailViewId
     dispatch(setSelectedDetailViewId(detailViewId));
     // Trigger a route change
-    history.push('/detailView');
+    navigate("/detailView");
   };
-  return <Home title={title} features={features} sort={handleSortClick} anchorClick={handleAnchorClick} />;
+  return (
+    <Home
+      title={title}
+      features={features}
+      sort={handleSortClick}
+      anchorClick={handleAnchorClick}
+    />
+  );
 };
 
 export default HomeContainer;

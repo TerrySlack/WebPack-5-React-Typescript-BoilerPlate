@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Nav from 'Components/Nav';
-import { useSelector } from 'react-redux';
-import { areEqual } from 'Utils/equalityChecks';
+import Nav from "Components/Nav";
+import { useSelector } from "react-redux";
+import { areEqual } from "Utils/equalityChecks";
 
-const NavContainer = () => {
+const NavContainer = function () {
   // Pull the data needed to Render the nav component
   const { title, logoImage, firstName } = useSelector(
     ({ nav: { title, logoImage }, profile: { firstName } }: any) => ({
@@ -17,14 +17,14 @@ const NavContainer = () => {
   );
 
   // Use history to trigger a route change, when the Welcome link is clicked.
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleWelcomeClick = useCallback((e: any) => {
     e.preventDefault();
-    history.push('/profileView');
+    navigate("/profileView");
   }, []);
   const handleHomeClick = useCallback((e: any) => {
     e.preventDefault();
-    history.push('/home');
+    navigate("/home");
   }, []);
 
   return (

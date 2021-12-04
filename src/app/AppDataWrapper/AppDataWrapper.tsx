@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { memo, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import DataWorker from 'worker-loader!./AppDataWrapper.worker';
-import { areEqualShallow } from 'Utils/equalityChecks';
-import { setNav } from 'Containers/Nav';
-import { setFeatures } from 'Containers/Home';
-import { setProfile } from 'Containers/ProfileView';
-import Routes from '../../routes';
+import DataWorker from "worker-loader!./AppDataWrapper.worker";
+import { areEqualShallow } from "Utils/equalityChecks";
+import { setNav } from "Containers/Nav";
+import { setFeatures } from "Containers/Home";
+import { setProfile } from "Containers/ProfileView";
+import { AppRoutes } from "../../routes";
 
 // This is kind of like a provider.
 const AppDataWrapper = memo(() => {
@@ -43,7 +43,7 @@ const AppDataWrapper = memo(() => {
       }
     };
   }, [worker]);
-  return <Routes />;
+  return <AppRoutes />;
 }, areEqualShallow);
 
 export default AppDataWrapper;
