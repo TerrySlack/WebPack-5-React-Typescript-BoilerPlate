@@ -1,19 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from "react";
 
-// Pull the mock data
-import createStore from '../store';
-import './App.css';
-import AppDataWrapper from './AppDataWrapper';
-
-// Create the store
-const store = createStore();
+import "./App.scss";
+import "./App.css";
+import { AppRoutes } from "../routes";
 
 // Render the app
-const App = () => (
-  <Provider store={store}>
-    <AppDataWrapper />
-  </Provider>
-);
+const App = function () {
+  return <AppRoutes />;
+};
 
 export default App;

@@ -1,68 +1,89 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import Home from "Components/Home";
-import { useSelector, useDispatch } from "react-redux";
-import { areEqual } from "Utils/equalityChecks";
-import customSort from "Utils/sortData";
-import { setSelectedDetailViewId, setSortedFeatures } from "Containers/Home";
+import { CardList } from "Components/CardList";
+import { Pagination } from "Components/Pagination";
+import { SearchBox } from "Components/SearchBox";
+import { usePhotos } from "Hooks/useAllPhotos";
 
 const HomeContainer = function () {
-  const dispatch = useDispatch();
-  const { features, title } = useSelector(
-    ({ home: { features, title } }: any) => ({ features, title }),
-    areEqual
+  // const [photos, setPhotos] = useState([]);
+  const [queryType, setQueryType] = useState("");
+  const [pageCount, setPageCount] = useState(1);
+
+  const [currentItems, setCurrentItems] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [noMatches, setNoMatches] = useState("");
+
+  // Let's preserve the reference to the routing object
+  const allPhotosObj = useMemo(() => ({ route: "all-photos" }), []);
+
+  // load some photos on initial landing
+  const { photos } = usePhotos(allPhotosObj);
+
+  // Let's preserve the reference to the routing object
+  const searchPhotosObj = useMemo(
+    () => ({
+      route: "query-photos",
+      type: "post",
+      data: { search: queryType },
+    }),
+    [queryType]
   );
 
-  // Force a rerender,
-  const [, setSortColumn] = useState("");
-  const [sortDirection, setSortDirection] = useState("desc");
-  const navigate = useNavigate();
+  // get photos based on keyword entered by user
+  const { photos: searchPhotos } = usePhotos(searchPhotosObj);
 
-  const handleSortClick = (e: any) => {
-    e.preventDefault();
+  // load assembly of photos, depending on whether a user is doing a search or not.
+  useEffect(() => {
+    if (searchPhotos.length) {
+      setCurrentItems(searchPhotos);
+    } else if (photos?.length) {
+      const endOffset = itemOffset + 9; // Put the 9 in a constant.
 
-    // The search will be one on the properties object, in each element of the feature array
-    const text = `properties.${e.target.dataset.key.toLocaleLowerCase()}`;
+      setCurrentItems(photos.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(photos.length / 9));
+      if (currentItems?.length === 0 && queryType?.length > 0) {
+        setNoMatches("No matches found.");
+      }
+    }
+  }, [itemOffset, photos, searchPhotos]);
 
-    // Set the direction, it should be the opposite of what is currently being displayed
-    const direction = sortDirection === "desc" ? "asc" : "desc";
+  // enter keyword
+  const handleChange = useCallback((e: any) => {
+    const searchField = e.target.value;
 
-    // Sort the features array
-    const sortedFeatures = customSort(text, direction, features);
+    setQueryType(searchField);
+  }, []);
 
-    // Store the column
-    setSortColumn(() => text);
+  // adjust range of photos
+  const handlePageClick = useCallback(
+    (e: any) => {
+      // Add a type to your event.
+      if (photos?.length > 0) {
+        const newOffset = (e.selected * 9) % photos.length;
+        setItemOffset(newOffset);
+      }
+    },
+    [photos]
+  );
 
-    // Store the sort direction
-    setSortDirection(() => direction);
-
-    // Dispatch the newly sorted array
-    dispatch(setSortedFeatures(sortedFeatures));
-  };
-
-  const handleAnchorClick = (e: any) => {
-    e.preventDefault();
-
-    // Dispatch the data I need to render the DetailView
-    // I don't want to copy the data, so have property that indicates which one was picked.
-    // Then in the DetailView component, useSelector, pull the data and send to the component
-
-    // Get the selected Row detailViewId
-    const detailViewId = e.target.dataset.key.toLocaleLowerCase();
-
-    // Dispatch the selected detailViewId
-    dispatch(setSelectedDetailViewId(detailViewId));
-    // Trigger a route change
-    navigate("/detailView");
-  };
+  // Only render if our api call is not loading, there is no error and some photos have been returned
   return (
-    <Home
-      title={title}
-      features={features}
-      sort={handleSortClick}
-      anchorClick={handleAnchorClick}
-    />
+    currentItems.length > 0 && (
+      <div className="App">
+        <SearchBox placeholder="search photos" handleChange={handleChange} />
+        {photos?.length > 0 && <CardList photoList={currentItems} />}
+        {currentItems?.length === 0 && <h1>{noMatches}</h1>}
+        {photos?.length >= 8 && (
+          <Pagination
+            initialPage={0}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+          />
+        )}
+        <div id="container" />
+      </div>
+    )
   );
 };
 

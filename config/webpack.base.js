@@ -1,8 +1,9 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const paths = require('./paths');
+const Dotenv = require("dotenv-webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const paths = require("./paths");
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -11,8 +12,8 @@ module.exports = {
   // Where webpack outputs the assets and bundles
   output: {
     path: paths.build,
-    filename: '[name].bundle.js',
-    publicPath: '/',
+    filename: "[name].bundle.js",
+    publicPath: "/",
   },
 
   // Customize the webpack build process
@@ -25,9 +26,9 @@ module.exports = {
       patterns: [
         {
           from: paths.public,
-          to: 'assets',
+          to: "assets",
           globOptions: {
-            ignore: ['*.DS_Store'],
+            ignore: ["*.DS_Store"],
           },
           noErrorOnMissing: true,
         },
@@ -37,16 +38,18 @@ module.exports = {
     // Generates an HTML file from a template
     // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
     new HtmlWebpackPlugin({
-      title: 'webpack Boilerplate',
+      title: "webpack Boilerplate",
       // favicon: paths.src + '/images/favicon.png',
       template: `${paths.src}/index.html`, // template file
-      filename: 'index.html', // output file
+      filename: "index.html", // output file
     }),
     // ESLint configuration
     new ESLintPlugin({
-      files: ['.', 'src', 'config'],
-      formatter: 'table',
+      files: [".", "src", "config"],
+      formatter: "table",
     }),
+    // Puts variables in .env files into process.env
+    new Dotenv(),
 
     // Prettier configuration
     // new PrettierPlugin(),
@@ -54,7 +57,7 @@ module.exports = {
   resolve: {
     alias: {
       // Assets: `${__dirname}/public/assets`,
-      Assets: '$paths.src}/shared/assets',
+      Assets: "$paths.src}/shared/assets",
       // Components: `${__dirname}/src/shared/components`,
       Components: `${paths.src}/shared/components`,
       Containers: `${paths.src}/shared/containers`,
@@ -65,7 +68,17 @@ module.exports = {
     },
     symlinks: false,
     cacheWithContext: false,
-    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.mjs', '.css', '.scss', '.sass'],
+    extensions: [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".json",
+      ".jsx",
+      ".mjs",
+      ".css",
+      ".scss",
+      ".sass",
+    ],
   },
 
   // Determine how modules within the project are treated
@@ -75,27 +88,27 @@ module.exports = {
       {
         test: /\.(js|jsx|tsx|ts|mjs)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
       {
         test: /\.(ts|tsx)$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: "ts-loader",
           },
         ],
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack'],
+        use: ["@svgr/webpack"],
       },
       {
         test: /\.(?:ico|png|jpg|gif|jpeg|ttf)$/,
-        type: 'assets/resource',
+        type: "assets/resource",
       },
 
       // Images: Copy image files to build folder
-      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'assets/resource' },
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: "assets/resource" },
 
       // Fonts and SVGs: Inline files
       // { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'assets/inline' },
