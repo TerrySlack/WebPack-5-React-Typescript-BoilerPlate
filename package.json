@@ -4,13 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "prestart": "yarn prep",
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "build-storybook": "build-storybook",
     "lint": "eslint --ext 'mjs,js,jsx,ts,tsx' --max-warnings=0 --fix",
     "lint-staged": "lint-staged",
     "prepare-husky": "husky install",
-    "prep": "yarn && yarn prepare-husky && yarn start",
+    "prep": "yarn && yarn prepare-husky",
     "storybook": "start-storybook -p 6006",
     "server": "yarn --cwd src/server start"
   },
