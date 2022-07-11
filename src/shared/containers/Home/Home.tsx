@@ -5,4 +5,4 @@ const HomeContainer = function () {
   return <div>Welcome Home</div>;
 };
 
-export default HomeContainer;
+export { HomeContainer as Home };

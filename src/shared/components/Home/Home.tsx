@@ -6,7 +6,7 @@ import classes from "./home.module.css";
 interface Props {
   title: any;
 }
-const Home = memo(
+export const Home = memo(
   ({ title }: Props) => (
     <div className={classes.container}>
       <div className={`${classes.centerTitle} ${classes.centered}`}>
@@ -16,5 +16,3 @@ const Home = memo(
   ),
   areEqual
 );
-
-export default Home;
