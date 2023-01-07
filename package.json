@@ -75,7 +75,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
-    "core-js": "^3.27.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
@@ -127,12 +126,7 @@
   "babel": {
     "presets": [
       [
-        "@babel/preset-env",
-        {
-          "debug": true,
-          "useBuiltIns": "usage",
-          "corejs": "3.6.5"
-        }
+        "@babel/preset-env"       
       ],
       [
         "@babel/preset-react"
