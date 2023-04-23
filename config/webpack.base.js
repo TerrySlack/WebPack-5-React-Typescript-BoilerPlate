@@ -57,7 +57,7 @@ module.exports = {
   resolve: {
     alias: {
       // Assets: `${__dirname}/public/assets`,
-      Assets: "$paths.src}/shared/assets",
+      Assets: `${paths.src}/shared/assets`,
       // Components: `${__dirname}/src/shared/components`,
       Components: `${paths.src}/shared/components`,
       Containers: `${paths.src}/shared/containers`,
