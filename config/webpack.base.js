@@ -62,7 +62,6 @@ module.exports = {
       Components: `${paths.src}/shared/components`,
       Containers: `${paths.src}/shared/containers`,
       Context: `${paths.src}/shared/context`,
-      HOC: `${paths.src}/shared/hoc`,
       Utils: `${paths.src}/shared/utils`,
       Hooks: `${paths.src}/shared/hooks`,
     },
@@ -76,8 +75,6 @@ module.exports = {
       ".jsx",
       ".mjs",
       ".css",
-      ".scss",
-      ".sass",
     ],
   },
 

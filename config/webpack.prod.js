@@ -1,17 +1,17 @@
-const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const common = require('./webpack.base.js');
-const paths = require('./paths');
+const { merge } = require("webpack-merge");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserJSPlugin = require("terser-webpack-plugin");
+const common = require("./webpack.base.js");
+const paths = require("./paths");
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: "production",
   devtool: false,
   output: {
     path: paths.build,
-    publicPath: '/',
-    filename: 'js/[name].[contenthash].bundle.js',
+    publicPath: "/",
+    filename: "js/[name].[contenthash].bundle.js",
   },
   module: {
     rules: [
@@ -20,15 +20,14 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 2,
               sourceMap: false,
               modules: true,
             },
           },
-          'postcss-loader',
-          'sass-loader',
+          "postcss-loader",
         ],
       },
     ],
@@ -37,8 +36,8 @@ module.exports = merge(common, {
     // Extracts CSS into separate files
     // Note: style-loader is for development, MiniCssExtractPlugin is for production
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: '[id].css',
+      filename: "styles/[name].[contenthash].css",
+      chunkFilename: "[id].css",
     }),
   ],
   optimization: {
@@ -51,16 +50,16 @@ module.exports = merge(common, {
       }),
       new CssMinimizerPlugin(),
     ],
-    runtimeChunk: 'single',
+    runtimeChunk: "single",
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
       maxInitialRequests: Infinity,
       minSize: 0,
       cacheGroups: {
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
+          name: "vendors",
+          chunks: "all",
         },
       },
     },

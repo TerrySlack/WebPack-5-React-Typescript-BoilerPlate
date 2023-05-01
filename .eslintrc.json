@@ -17,7 +17,6 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint", "import"],
-  //"ignorePatterns": [".storybook/*.js"],
   "rules": {
     "no-shadow": "off",
     "no-useless-constructor": "off",
@@ -51,7 +50,8 @@
     "func-names": "off",
     "import/prefer-default-export": "off",
     "react/jsx-closing-bracket-location": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "import/resolver": {
@@ -61,12 +61,11 @@
           ["Components", "./src/shared/components"],
           ["Containers", "./src/shared/containers"],
           ["Context", "./src/shared/context"],
-          ["HOC", "./src/shared/hoc"],
           ["Utils", "./src/shared/utils"],
           ["Pages", "./src/pages"],
           ["Hooks", "./src/shared/hooks"]
         ],
-        "extensions": [".mjs", ".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".mjs", ".jsx", ".ts", ".tsx"]
       }
     }
   }
