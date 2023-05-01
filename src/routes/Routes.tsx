@@ -1,10 +1,7 @@
 import React, { FC } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 import { Home } from "Containers/Home";
-
-const history = createBrowserHistory();
 
 interface Props {}
 
@@ -20,4 +17,4 @@ const AppRoutes: FC<Props> = function () {
   );
 };
 
-export { AppRoutes, history };
+export { AppRoutes };

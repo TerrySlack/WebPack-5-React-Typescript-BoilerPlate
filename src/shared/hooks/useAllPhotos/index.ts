@@ -1,1 +1,0 @@
-export { usePhotos } from "./usePhotos";
