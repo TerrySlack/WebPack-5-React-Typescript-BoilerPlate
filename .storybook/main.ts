@@ -30,14 +30,6 @@ const config: StorybookConfig = {
   webpackFinal: async (config: any,{ configType }) => {
 
     config?.resolve?.modules.push(path.resolve("../src/shared"));
-      //Setup Alias from our webpack
-    //@ts-ignore
-    // config?.resolve?.plugins = [
-    //   ...(config?.resolve?.plugins || []),
-    //   new TsconfigPathsPlugin({
-    //     extensions: config?.resolve.extensions,
-    //   }),
-    // ];
     config.plugins.push(new MiniCssExtractPlugin());
     
      //Setup Alias
@@ -45,35 +37,9 @@ const config: StorybookConfig = {
       ...config.resolve.alias,
       ...common.resolve.alias,
     };
-
-    console.log(`
-    __dirname  ${__dirname}
-    resolved path ${path.resolve(__dirname, "../src/shared")}
-
-    alias ${JSON.stringify(config?.resolve?.alias)}
-    
-    `);
    
-    /*
-    config?.resolve?.modules.push(path.resolve(__dirname, "../src/shared"));
-    //Setup Alias
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      ...custom.resolve.alias,
-    };
-      //Setup Alias from our webpack
-    //@ts-ignore
-    config?.resolve?.plugins = [
-      ...(config?.resolve?.plugins || []),
-      new TsconfigPathsPlugin({
-        extensions: config?.resolve.extensions,
-      }),
-    ];
-      config.plugins.push(new MiniCssExtractPlugin());
-    */
     return {
       ...config
-      //module: { ...config.module, rules: custom.module.rules },
     };
   },
   typescript: {

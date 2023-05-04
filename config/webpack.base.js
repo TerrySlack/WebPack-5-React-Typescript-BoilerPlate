@@ -56,26 +56,16 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      // Assets: `${__dirname}/public/assets`,
       Assets: `${paths.src}/shared/assets`,
-      // Components: `${__dirname}/src/shared/components`,
       Components: `${paths.src}/shared/components`,
       Containers: `${paths.src}/shared/containers`,
-      Context: `${paths.src}/shared/context`,
       Utils: `${paths.src}/shared/utils`,
       Hooks: `${paths.src}/shared/hooks`,
+      Providers: `${paths.src}/shared/providers`,
     },
     symlinks: false,
     cacheWithContext: false,
-    extensions: [
-      ".ts",
-      ".tsx",
-      ".js",
-      ".json",
-      ".jsx",
-      ".mjs",
-      ".css",
-    ],
+    extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".mjs", ".css"],
   },
 
   // Determine how modules within the project are treated

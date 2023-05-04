@@ -1,22 +1,16 @@
 import { memo } from "react";
 
 import { areEqual } from "Utils/equalityChecks";
-import classes from "./home.module.css";
+import classes from "./other.module.css";
 
 interface Props {
   title: any;
-  onClick: () => void;
 }
-export const Home = memo(
-  ({ title, onClick }: Props) => (
+export const Other = memo(
+  ({ title }: Props) => (
     <div className={classes.container}>
       <div className={`${classes.centerTitle} ${classes.centered}`}>
         <label className={classes.title}>{title}</label>
-      </div>
-      <div>
-        <button type="button" className={classes.button} onClick={onClick}>
-          Go to Other Route
-        </button>
       </div>
     </div>
   ),

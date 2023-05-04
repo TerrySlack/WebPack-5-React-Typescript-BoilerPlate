@@ -14,11 +14,3 @@
 .centered {
   text-align: center;
 }
-
-.button {
-  cursor: pointer;
-  border: silver;
-  color: #fff;
-  font-weight: bold;
-  background-color: dodgerblue;
-}

@@ -57,10 +57,9 @@
       "Assets/*": ["src/shared/assets/*"],
       "Components/*": ["src/shared/components/*"],
       "Containers/*": ["src/shared/containers/*"],
-      "HOC/*": ["src/shared/hoc/*"],
       "Hooks/*": ["src/shared/hooks/*"],
-      "Utils/*": ["src/shared/utils/*"],
-      "Context/*": ["src/shared/context/*"]
+      "Providers/*": ["src/shared/providers/*"],
+      "Utils/*": ["src/shared/utils/*"]
     },
     "rootDirs": [
       "src",
