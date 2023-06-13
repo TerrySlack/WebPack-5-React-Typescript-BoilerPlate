@@ -16,7 +16,6 @@ module.exports = merge(common, {
     // index: '/',
     open: true,
     compress: true,
-    hot: true,
     port: 3000,
   },
 
@@ -38,7 +37,7 @@ module.exports = merge(common, {
               },
             },
           },
-          { loader: "postcss-loader", options: { sourceMap: true } }
+          { loader: "postcss-loader", options: { sourceMap: true } },
         ],
         include: /\.module\.css$/i,
       },
@@ -51,7 +50,7 @@ module.exports = merge(common, {
             loader: "css-loader",
             options: { sourceMap: true, importLoaders: 1 },
           },
-          { loader: "postcss-loader", options: { sourceMap: true } }
+          { loader: "postcss-loader", options: { sourceMap: true } },
         ],
         exclude: /\.module\.css$/i,
       },
