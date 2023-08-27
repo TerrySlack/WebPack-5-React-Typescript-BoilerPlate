@@ -8,7 +8,6 @@ function HomeContainer() {
     navigate("../other");
   };
 
-  // Only render if our api call is not loading, there is no error and some photos have been returned
   return <Home title="Welcome Home" onClick={onClick} />;
 }
 
