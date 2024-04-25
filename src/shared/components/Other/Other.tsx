@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import { areEqual } from "Utils/equalityChecks";
-import classes from "./other.module.css";
+import * as classes from "./other.module.css";
 
 interface Props {
   title: any;
