@@ -1,4 +1,5 @@
 # WebPack-5-React-Typescript
+This repo is get uptodate, with the latest packages.  Although it may appear to be old, it's with the lastest React 18.x and webpack 5.x
 
 Boiler plate React project Typescript, React Router, Storybook and Css modules enabled.
 
