@@ -1,0 +1,74 @@
+export default [
+    {
+        "env": {
+          "browser": true,
+          "es2021": true
+        },
+        "extends": ["plugin:react/recommended", "airbnb"],
+        "globals": {
+          "Atomics": "readonly",
+          "SharedArrayBuffer": "readonly"
+        },
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "ecmaFeatures": {
+            "jsx": true
+          },
+          "ecmaVersion": 12,
+          "sourceType": "module"
+        },
+        "plugins": ["react", "@typescript-eslint", "import"],
+        "rules": {
+          "no-shadow": "off",
+          "no-useless-constructor": "off",
+          "no-use-before-define": [0],
+          "@typescript-eslint/no-use-before-define": [1],
+          "@typescript-eslint/no-unused-vars": "error",
+          "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
+          "max-len": "off",
+          "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+          ],
+          "jsx-a11y/anchor-is-valid": 0,
+          "jsx-a11y/label-has-associated-control": "off",
+          "indent": "off",
+          "react/jsx-indent-props": "off",
+          "no-case-declarations": "off",
+          "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+          "no-restricted-globals": "off",
+          "implicit-arrow-linebreak": "off",
+          "import/no-webpack-loader-syntax": "off",
+          "linebreak-style": "off",
+          "import/no-unresolved": "off",
+          "react/no-unescaped-entities": "off",
+          "func-names": "off",
+          "import/prefer-default-export": "off",
+          "react/jsx-closing-bracket-location": "off",
+          "react/jsx-props-no-spreading": "off",
+          "react/react-in-jsx-scope": "off"
+        },
+        "settings": {
+          "import/resolver": {
+            "alias": {
+              "map": [
+                ["Assets", "./shared/assets"],
+                ["Components", "./src/shared/components"],
+                ["Containers", "./src/shared/containers"],
+                ["Context", "./src/shared/context"],
+                ["Utils", "./src/shared/utils"],
+                ["Pages", "./src/pages"],
+                ["Hooks", "./src/shared/hooks"]
+              ],
+              "extensions": [".mjs", ".jsx", ".ts", ".tsx"]
+            }
+          }
+        }
+      }      
+]
