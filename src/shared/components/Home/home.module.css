@@ -6,7 +6,7 @@
   padding-bottom: 1em;
 }
 .title {
-  color: #000;
+  color: #b36a0f;
   font-weight: bold;
   font-size: 15px;
   opacity: 0.7;
@@ -20,5 +20,5 @@
   border: silver;
   color: #fff;
   font-weight: bold;
-  background-color: dodgerblue;
+  background-color: #000;
 }
