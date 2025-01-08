@@ -1,5 +1,7 @@
-import "./App.css";
+import "../tailwind.css";
 import { AppRoutes } from "../routes";
 
 // Render the app
-export const App = () => <AppRoutes />;
+export function App() {
+  return <AppRoutes />;
+}

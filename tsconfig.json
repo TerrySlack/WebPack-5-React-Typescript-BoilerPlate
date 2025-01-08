@@ -59,6 +59,9 @@
       "Containers/*": ["src/shared/containers/*"],
       "Hooks/*": ["src/shared/hooks/*"],
       "Providers/*": ["src/shared/providers/*"],
+      "Selectors/*": ["src/shared/selectors/*"],
+      "Store/*": ["src/shared/store/*"],
+      "Types/*": ["src/shared/types/*"],
       "Utils/*": ["src/shared/utils/*"]
     },
     "rootDirs": [
