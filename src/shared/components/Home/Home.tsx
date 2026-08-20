@@ -4,7 +4,7 @@ import { areEqual } from "Utils/equalityChecks";
 import * as classes from "./home.module.css";
 
 interface Props {
-  title: any;
+  title: string;
   onClick: () => void;
 }
 export const Home = memo(
