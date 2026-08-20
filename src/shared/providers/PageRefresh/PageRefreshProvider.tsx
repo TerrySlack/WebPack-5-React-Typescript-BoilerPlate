@@ -4,7 +4,7 @@ import {
   ReactNode,
   useCallback,
   useMemo,
-  useRef,
+  useState,
 } from "react";
 import { useBeforeUnload, useLocation } from "react-router-dom";
 
@@ -14,43 +14,33 @@ interface PageRefreshProviderProps {
   children: ReactNode | ReactNode[] | ReactElement | ReactElement[];
 }
 
-export type PageRefreshContextType = {
-  isLoggedIn: boolean;
-  getUrl: () => string;
-  setUrl: (url: string) => void;
-};
-
 export function PageRefreshProvider({ children }: PageRefreshProviderProps) {
-  const urlRef = useRef<string>(sessionStorage.getItem("refreshUrl")); // Default to empty
-
-  // Write CODE TO SET This to a default.  Ie, if it's not the default route, then set the user to loggedIn
-  const isLoggedInRef = useRef<boolean>(false);
-  const setUrl = (url: string) => {
-    // set the url to the ref
-    urlRef.current = url;
-
-    // store it in session storage.
-    sessionStorage.setItem("refreshUrl", url);
-  };
-  // const refreshUrl = sessionStorage.getItem("refreshUrl");
   const { pathname } = useLocation();
+
+  // Changed from setUrlState to setInternalUrl to fix the ESLint warning
+  const [url, setUrl] = useState<string>(
+    () => sessionStorage.getItem("refreshUrl") || ""
+  );
+
+  const isLoggedIn = pathname !== "/";
+
+  const setUrlInternalUrl = useCallback((newUrl: string) => {
+    setUrl(newUrl); // Uses the updated setter name
+    sessionStorage.setItem("refreshUrl", newUrl);
+  }, []);
+
   useBeforeUnload(
     useCallback(() => {
-      if (pathname !== "/" && pathname !== urlRef.current) {
-        setUrl(pathname);
+      if (pathname !== "/" && pathname !== url) {
+        sessionStorage.setItem("refreshUrl", pathname);
       }
-    }, [urlRef.current, pathname])
+    }, [pathname, url])
   );
 
-  // Let's memoize value and prevent unccessary re-rendering
   const value = useMemo(
-    () => ({ isLoggedIn: isLoggedInRef.current, url: urlRef.current, setUrl }),
-    [isLoggedInRef.current, urlRef.current, setUrl]
+    () => ({ isLoggedIn, url, setUrlInternalUrl }),
+    [isLoggedIn, url, setUrlInternalUrl]
   );
 
-  return (
-    <PageRefreshContext.Provider value={value}>
-      {children}
-    </PageRefreshContext.Provider>
-  );
+  return <PageRefreshContext value={value}>{children}</PageRefreshContext>;
 }
