@@ -11,7 +11,7 @@ Install the dependencies using your preferred package manager:
 ```bash
 npm install
 # or
-yarn install
+pnpm install
 # or
 pnpm install
 ```
@@ -31,7 +31,7 @@ npx storybook@latest automigrate
 ```bash
 npm run dev
 # or
-yarn dev
+pnpm dev
 ```
 
 ### Build for Production
@@ -39,7 +39,7 @@ yarn dev
 ```bash
 npm run build
 # or
-yarn build
+pnpm build
 ```
 
 ### Run Storybook
@@ -47,7 +47,7 @@ yarn build
 ```bash
 npm run storybook
 # or
-yarn storybook
+pnpm storybook
 ```
 
 ## Explanation & Architecture

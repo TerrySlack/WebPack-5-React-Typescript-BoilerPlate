@@ -1,19 +1,26 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react, { Options as ReactOptions } from "@vitejs/plugin-react";
 import path from "path";
+import fs from "fs"; // 1. IMPORT NODE'S FS PACKAGE
+
+const reactCompilerConfig: ReactOptions = {
+  compiler: true,
+};
+
+// 2. DYNAMICALLY RESOLVE THE REAL PATH OF YOUR SYMLINK REGARDLESS OF OS WINDOWS/MAC SLASHES
+// const timerPackageRealPath = fs.realpathSync(
+//   path.resolve(import.meta.dirname, "../../done/mainframework-timer")
+// );
+
+const timerPackageRealPath = fs.realpathSync(
+  path.resolve(import.meta.dirname, "../done/mainframework-timer")
+);
 
 export default defineConfig({
-  root: "./src", // Keeps Vite focused on your src directory
+  root: "./src",
   plugins: [
-    /* 
-      NATIVE RUST COMPILER: Passes 'compiler: true' to invoke oxc-transform-react.
-      The object configuration is explicitly type-cast to suppress the local 
-      plugin property declaration mismatch error from your IDE.
-    */
-    react({ 
-      compiler: true 
-    } as Parameters<typeof react>[0]),
-    
+    react(reactCompilerConfig),
+
     // Custom inline plugin to handle your dynamic script tag injection
     {
       name: "html-script-injector",
@@ -25,9 +32,9 @@ export default defineConfig({
               tag: "script",
               attrs: {
                 type: "module",
-                src: "/index.tsx", // Points to your React entry file inside src/
+                src: "/index.tsx",
               },
-              injectTo: "body", // Injects the tag right before </body>
+              injectTo: "body",
             },
           ],
         };
@@ -39,9 +46,20 @@ export default defineConfig({
     outDir: "../dist",
     emptyOutDir: true,
   },
+
+  worker: {
+    format: "es",
+    plugins: () => [react(reactCompilerConfig)],
+  },
+
+  optimizeDeps: {
+    include: ["scheduler"],
+  },
+
   resolve: {
+    preserveSymlinks: false,
+    dedupe: ["react", "react-dom"],
     alias: {
-      /* Swapped __dirname with import.meta.dirname to support Vite's modern native ESM loader */
       Assets: path.resolve(import.meta.dirname, "./src/shared/assets"),
       Components: path.resolve(import.meta.dirname, "./src/shared/components"),
       Containers: path.resolve(import.meta.dirname, "./src/shared/containers"),
@@ -55,5 +73,13 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    fs: {
+      allow: [
+        path.resolve(import.meta.dirname, "./src"),
+        path.resolve(import.meta.dirname, "../public"),
+        // 3. PASS THE RAW RESOLVED PHYSICAL DISK PATH STRAIGHT TO VITE'S ALLOW LIST
+        timerPackageRealPath,
+      ],
+    },
   },
 });

@@ -39,7 +39,7 @@
       "Utils/*": ["./src/shared/utils/*"]
     },
     "typeRoots": ["./src/types", "./node_modules/@types"],
-    "types": ["jest", "node"],
+    "types": ["jest"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
 
